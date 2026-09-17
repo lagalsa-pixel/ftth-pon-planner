@@ -1,0 +1,51 @@
+project:
+  name: "Новый населенный пункт"
+  source_image: "source.jpg"
+  output_dir: "output"
+
+# Prefer GeoTIFF if available. For JPG/PNG provide known lon/lat bbox.
+georef:
+  mode: "bbox"           # bbox | geotiff
+  bbox_lonlat: [82.0, 50.0, 82.1, 50.1]
+
+counts:
+  private_households: null     # authoritative count is QA, not mandatory detector truth
+
+buildings:
+  mode: "geojson"        # geojson | auto
+  input_geojson: "buildings.geojson"
+  count_reconciliation: "none"  # none | cap | exact_review
+  min_active_confidence: 0.55
+  private_min_area_m2: 30
+  private_max_area_m2: 350
+  mdu_min_area_m2: 350
+  building_max_area_m2: 5000
+
+roads:
+  mode: "geojson"        # geojson | auto
+  input_geojson: "roads.geojson"
+  snap_m: 15
+
+olt:
+  mode: "fixed"          # fixed | auto
+  point_lonlat: [82.05, 50.05]
+
+network:
+  pon_max_private: 32
+  distribution_cable_f: 4
+  feeder_standard_fibers: [4, 8, 12, 24, 48, 72, 96, 144]
+  feeder_reserve_ratio: 0.25
+  minimum_mufta_incoming_f: 8
+  mdu_dedicated_pon: true
+  optical_budget_db: 28.0
+  fiber_loss_db_km: 0.35
+  connector_loss_db: 1.0
+  splice_loss_db: 0.4
+  engineering_margin_db: 3.0
+  splitter_loss_db:
+    "1x2": 3.8
+    "1x8": 10.7
+    "1x16": 13.7
+
+render:
+  render_max_side_px: 3000
